@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="search_icon_padding">12dp</dimen>
+    <dimen name="search_view_text_padding">65dp</dimen>
+
+    <dimen name="indicator_non_select_dimen">6dp</dimen>
+    <dimen name="indicator_select_dimen">12dp</dimen>
+
+    <dimen name="indicator_select_dimen_10">10dp</dimen>
+    <dimen name="dimen_3dp">3dp</dimen>
+</resources>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="PickMediaViewStyle">
+        <attr name="editMenuColor" format="color" />
+        <attr name="defaultbackgroundImage" format="reference" />
+    </declare-styleable>
+
+</resources>
