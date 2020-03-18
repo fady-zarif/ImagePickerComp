@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(intent, PickMediaView.PICK_IMAGE_CODE);
             }
         });
-
     }
 
 

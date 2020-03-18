@@ -82,6 +82,11 @@ public class PickMediaView extends LinearLayout implements View.OnClickListener 
         btnfloatingRemove.setOnClickListener(this);
         btnfloatingAdd.setOnClickListener(this);
         imageView = findViewById(R.id.imgDefault);
+        resetPickImageComp();
+
+    }
+
+    public void resetPickImageComp() {
 
         imagesArrayList = new ArrayList<>();
         showRemoveBtn();
@@ -124,7 +129,6 @@ public class PickMediaView extends LinearLayout implements View.OnClickListener 
         pickMediaPagerAdapter.updateImages(imagesArrayList);
         pickMediaPagerAdapter.notifyDataSetChanged();
         viewPager.setCurrentItem(imagesArrayList.size() - 1);
-
         checkAddRemoveButtons();
         showHideAddButton();
     }
@@ -137,6 +141,10 @@ public class PickMediaView extends LinearLayout implements View.OnClickListener 
 
     public ArrayList<String> getImagesArrayList() {
         return imagesArrayList;
+    }
+
+    public void resetPickImageComponent() {
+        resetPickImageComp();
     }
 
     @Override

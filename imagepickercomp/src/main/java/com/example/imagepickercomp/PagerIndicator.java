@@ -10,9 +10,6 @@ import androidx.viewpager.widget.ViewPager;
 
 import java.util.ArrayList;
 
-/**
- * Created by yibrahim on 3/7/2017.
- */
 
 public class PagerIndicator extends LinearLayout implements ViewPager.OnPageChangeListener {
     protected ArrayList<ImageView> dots;
@@ -45,11 +42,11 @@ public class PagerIndicator extends LinearLayout implements ViewPager.OnPageChan
 
     }
 
-    public void setViewPager(ViewPager viewPager, int indicatorSelectedDot, int indicatorNonSelectedDot) {
-        this.indicatorNonSelectedDot = indicatorNonSelectedDot;
-        this.indicatorSelectedDot = indicatorSelectedDot;
-        setViewPager(viewPager);
-    }
+//    public void setViewPager(ViewPager viewPager, int indicatorSelectedDot, int indicatorNonSelectedDot) {
+//        this.indicatorNonSelectedDot = indicatorNonSelectedDot;
+//        this.indicatorSelectedDot = indicatorSelectedDot;
+//        setViewPager(viewPager);
+//    }
 
     public void setViewPager(ViewPager viewPager) {
         this.viewPager = viewPager;
@@ -63,7 +60,10 @@ public class PagerIndicator extends LinearLayout implements ViewPager.OnPageChan
 
     void setUiPageViewController() {
         int dotsCount = viewPager.getAdapter().getCount();
-        //parms of dots
+
+        if (paramsDots!=null)
+            removeAllViews();
+
         paramsDots = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         paramsDots.setMargins(4, 0, 4, 0);
 
@@ -95,11 +95,6 @@ public class PagerIndicator extends LinearLayout implements ViewPager.OnPageChan
             dots.get(position).setImageDrawable(getContext().getDrawable(indicatorSelectedDot));
     }
 
-    public void removeAllDots() {
-        for (int i = 0; i < dots.size(); i++) {
-            removeOnewDot(i);
-        }
-    }
 
     @Override
     public void onPageScrolled(int i, float v, int i1) {
