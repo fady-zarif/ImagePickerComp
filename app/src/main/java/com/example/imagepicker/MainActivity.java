@@ -10,6 +10,8 @@ import android.provider.MediaStore;
 import com.example.imagepickercomp.IPickMedia;
 import com.example.imagepickercomp.PickMediaView;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
     PickMediaView pickMediaView;
 
@@ -18,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         pickMediaView = findViewById(R.id.pickMediaView);
-        pickMediaView.handlePickMedia(4, new IPickMedia.IHandlePickImage() {
+        pickMediaView.handlePickMedia(new IPickMedia.IHandlePickImage() {
             @Override
             public void onHandleAddPickImage() {
                 Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
@@ -34,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             if (requestCode == PickMediaView.PICK_IMAGE_CODE) {
-                pickMediaView.setDataFromOnResult(data.getData());
+                pickMediaView.setDataFromOnResult(String.valueOf(data.getData()));
             }
         }
     }

@@ -3,6 +3,7 @@
     <declare-styleable name="PickMediaViewStyle">
         <attr name="editMenuColor" format="color" />
         <attr name="defaultbackgroundImage" format="reference" />
+        <attr name="maxImages" format="integer" />
     </declare-styleable>
 
 </resources>

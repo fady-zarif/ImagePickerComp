@@ -2,7 +2,6 @@ package com.example.imagepickercomp;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.net.Uri;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,6 +51,9 @@ public class PickMediaView extends LinearLayout implements View.OnClickListener 
             btnfloatingRemove.setColorNormal(typedArray.getColor(R.styleable.PickMediaViewStyle_editMenuColor, -1));
 
         }
+        if (typedArray.hasValue(R.styleable.PickMediaViewStyle_maxImages)) {
+            setMaxImages(typedArray.getInt(R.styleable.PickMediaViewStyle_maxImages, 2));
+        }
         if (typedArray.hasValue(R.styleable.PickMediaViewStyle_defaultbackgroundImage)) {
             imageView.setImageResource(typedArray.getResourceId(R.styleable.PickMediaViewStyle_defaultbackgroundImage, -1));
         }
@@ -71,6 +73,11 @@ public class PickMediaView extends LinearLayout implements View.OnClickListener 
         this.maxImages = maxImages;
     }
 
+    public void setImagesArrayList(ArrayList<String> imagesArrayList) {
+        this.imagesArrayList = imagesArrayList;
+        resetPickImageComp();
+    }
+
     private void initView(Context context) {
         this.context = context;
         LayoutInflater.from(context).inflate(R.layout.pick_media_view, this);
@@ -82,13 +89,14 @@ public class PickMediaView extends LinearLayout implements View.OnClickListener 
         btnfloatingRemove.setOnClickListener(this);
         btnfloatingAdd.setOnClickListener(this);
         imageView = findViewById(R.id.imgDefault);
+        imagesArrayList = new ArrayList<>();
         resetPickImageComp();
 
     }
 
     public void resetPickImageComp() {
 
-        imagesArrayList = new ArrayList<>();
+
         showRemoveBtn();
         showHideAddButton();
         pickMediaPagerAdapter = new PickMediaPagerAdapter(imagesArrayList, context);
@@ -98,7 +106,7 @@ public class PickMediaView extends LinearLayout implements View.OnClickListener 
 
 
     /// you have to call this method from the activity or fragment to pick the pic
-    public void handlePickMedia(int maxImages, IPickMedia.IHandlePickImage iHandlePickImage) {
+    public void handlePickMedia(IPickMedia.IHandlePickImage iHandlePickImage) {
         this.iHandlePickImage = iHandlePickImage;
         setMaxImages(maxImages);
     }
@@ -122,15 +130,14 @@ public class PickMediaView extends LinearLayout implements View.OnClickListener 
     }
 
 
-    public void setDataFromOnResult(Uri uri) {
+    public void setDataFromOnResult(String uri) {
 
-        imagesArrayList.add(String.valueOf(uri));
+        imagesArrayList.add(uri);
         pagerIndicator.addOneDot(imagesArrayList.size() - 1, true);
         pickMediaPagerAdapter.updateImages(imagesArrayList);
         pickMediaPagerAdapter.notifyDataSetChanged();
         viewPager.setCurrentItem(imagesArrayList.size() - 1);
         checkAddRemoveButtons();
-        showHideAddButton();
     }
 
     private void checkAddRemoveButtons() {
@@ -144,6 +151,7 @@ public class PickMediaView extends LinearLayout implements View.OnClickListener 
     }
 
     public void resetPickImageComponent() {
+        imagesArrayList = new ArrayList<>();
         resetPickImageComp();
     }
 

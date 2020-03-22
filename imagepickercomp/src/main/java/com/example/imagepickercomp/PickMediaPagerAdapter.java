@@ -41,18 +41,10 @@ public class PickMediaPagerAdapter extends PagerAdapter {
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         ImageView imageView = getImageView();
         imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-        imageView.setImageURI(Uri.parse(imagesArrayList.get(position)));
-
-////        String imagePath = imagesArrayList.get(position);
-//        if (true) {
-//            imageView.setImageURI(Uri.parse(imagesArrayList.get(position)));
-////            int imageId = Integer.parseInt(imagePath);
-////            if (imageId != 0) {
-////                imageView.setImageResource(imageId);
-////            }
-//        } else {
-//            Picasso.get().load(imagesArrayList.get(position)).placeholder(R.drawable.bg_pick_media).into(imageView);
-//        }
+        if (imagesArrayList.get(position).substring(0, 3).equals("htt")) {
+            Picasso.get().load(imagesArrayList.get(position)).placeholder(R.drawable.loading_image).into(imageView);
+        } else
+            imageView.setImageURI(Uri.parse(imagesArrayList.get(position)));
         container.addView(imageView);
         return imageView;
     }
